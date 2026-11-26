@@ -265,12 +265,17 @@ export default function FastOfEstherApp() {
 
   return (
     <main dir={t.dir} className="max-w-4xl mx-auto p-6 font-sans">
-      {/* Language Switcher */}
-      <div className="flex justify-end gap-2 mb-6">
-        <button onClick={() => setLang('en')} className="px-3 py-1 border rounded bg-white">English</button>
-        <button onClick={() => setLang('he')} className="px-3 py-1 border rounded bg-white">עברית</button>
-        <button onClick={() => setLang('es')} className="px-3 py-1 border rounded bg-white">Español</button>
+          {/* Language Switcher */}
+      <div className="flex flex-wrap justify-end gap-2 mb-6">
+        <button onClick={() => setLang('en')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">English</button>
+        <button onClick={() => setLang('he')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">עברית</button>
+        <button onClick={() => setLang('yi')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">ייִדיש</button>
+        <button onClick={() => setLang('es')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Español</button>
+        <button onClick={() => setLang('fr')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Français</button>
+        <button onClick={() => setLang('ru')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Русский</button>
+        <button onClick={() => setLang('pt')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Português</button>
       </div>
+
 
       {/* Header & Live Counter */}
       <header className="text-center mb-8 max-w-2xl mx-auto">
