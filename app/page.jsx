@@ -143,6 +143,90 @@ const translations = {
     successMsg: 'אַ דאַנק. אייער שטימע און ווידעאָ זענען צוגעלייגט געוואָרן צו די 15 מיליאָן.',
     galleryTitle: 'שטימען פֿון דער גאָרער וועלט',
     noVideos: 'זייט דער ערשטער צו טיילן אַ 10-סעקונדע ווידעאָ.'
+  },
+    de: {
+    dir: 'ltr',
+    title: 'Ihr Name War Esther',
+    subtitle: 'Am 22. März 2027 vereinen sich weltweit 15 Millionen Stimmen in Fasten, Erinnerung und Solidarität.',
+    storyTitle: 'Warum „Ihr Name War Esther“?',
+    storyBody: 'Inspiriert von der zeitlosen Geschichte von Mut, Identität und gemeinsamem Handeln in der Not ruft der Fastentag Esther Menschen weltweit dazu auf, gemeinsam innezuhalten, zu fasten und ihre Stimme zu erheben.',
+    counterLabel: 'Registrierte Stimmen & Zusagen',
+    fastTimesHeader: 'Ihre Lokalen Fastenzeiten (22. März 2027)',
+    starts: 'Beginn des Fastens (Morgendämmerung)',
+    ends: 'Ende des Fastens (Einbruch der Nacht)',
+    nameLabel: 'Vollständiger Name',
+    countryLabel: 'Wohnsitzland',
+    durationLabel: 'Wie lange werden Sie fasten?',
+    durationOptions: ['Vollständiges Fasten (Morgendämmerung bis Nacht)', 'Halber Tag', 'Bis Mittag', 'Individuell / Medizinische Ausnahme'],
+    videoLabel: '10-Sekunden-Videobotschaft teilen (Max. 10s)',
+    submitBtn: 'Meine Stimme & Video hinzufügen',
+    errorDuration: 'Das Video darf maximal 10 Sekunden lang sein.',
+    successMsg: 'Vielen Dank. Ihre Stimme und Ihr Video wurden zu den 15 Millionen hinzugefügt.',
+    galleryTitle: 'Stimmen aus der Ganzen Welt',
+    noVideos: 'Seien Sie der Erste, der eine 10-Sekunden-Videobotschaft teilt.'
+  },
+  it: {
+    dir: 'ltr',
+    title: 'Il Suo Nome Era Ester',
+    subtitle: 'Il 22 marzo 2027, 15 milioni di voci si uniscono in tutto il mondo nel digiuno, nella memoria e nella solidarietà.',
+    storyTitle: 'Perché "Il Suo Nome Era Ester"?',
+    storyBody: 'Ispirata alla storia senza tempo di coraggio, identità e unità di fronte alle avversità, questa giornata invita milioni di persone a fermarsi, digiunare e condividere la propria voce.',
+    counterLabel: 'Voci e Adesioni Registrate',
+    fastTimesHeader: 'I Tuoi Orari Locali di Digiuno (22 Marzo 2027)',
+    starts: 'Inizio del Digiuno (Alba)',
+    ends: 'Fine del Digiuno (Tramonto/Notte)',
+    nameLabel: 'Nome Completo',
+    countryLabel: 'Paese di Residenza',
+    durationLabel: 'Per quanto tempo digiunerai?',
+    durationOptions: ['Digiuno Completo (Dall’alba a notte fonda)', 'Mezza Giornata', 'Fino a Mezzogiorno', 'Personalizzato / Esenzione Medica'],
+    videoLabel: 'Condividi un Video di 10 Secondi (Max 10s)',
+    submitBtn: 'Aggiungi la Mia Voce e il Video',
+    errorDuration: 'Il video deve durare 10 secondi o meno.',
+    successMsg: 'Grazie. La tua voce e il tuo video sono stati aggiunti ai 15 milioni.',
+    galleryTitle: 'Voci da Tutto il Mondo',
+    noVideos: 'Sii il primo a condividere un messaggio video di 10 secondi.'
+  },
+  ar: {
+    dir: 'rtl',
+    title: 'كان اسمها إستير',
+    subtitle: 'في 22 مارس 2027، يتحد 15 مليون صوت حول العالم في الصيام والذكرى والتضامن.',
+    storyTitle: 'لماذا "كان اسمها إستير"؟',
+    storyBody: 'مستوحى من قصة الشجاعة والهوية والوحدة في مواجهة الشدائد، يجمع هذا اليوم ملايين الأصوات من كل ركن في العالم للوقوف معاً في صيام وتضامن مشترك.',
+    counterLabel: 'الأصوات والتعهدات المسجلة',
+    fastTimesHeader: 'أوقات الصيام المحلية الخاصة بك (22 مارس 2027)',
+    starts: 'بداية الصيام (الفجر)',
+    ends: 'نهاية الصيام (حلول الليل)',
+    nameLabel: 'الاسم الكامل',
+    countryLabel: 'بلد الإقامة',
+    durationLabel: 'كم من الوقت ستصوم؟',
+    durationOptions: ['صيام كامل (من الفجر حتى حلول الليل)', 'نصف يوم', 'حتى منتصف النهار', 'مخصص / إعفاء طبي'],
+    videoLabel: 'شارك رسالة فيديو مدتها 10 ثوانٍ (الحد الأقصى 10 ثوانٍ)',
+    submitBtn: 'أضف صوتي والفيديو الخاص بي',
+    errorDuration: 'يجب أن تكون مدة الفيديو 10 ثوانٍ أو أقل.',
+    successMsg: 'شكراً لك. تمت إضافة صوتك والفيديو الخاص بك إلى الـ 15 مليون.',
+    galleryTitle: 'أصوات من جميع أنحاء العالم',
+    noVideos: 'كن أول من يشارك رسالة فيديو مدتها 10 ثوانٍ.'
+  },
+  fa: {
+    dir: 'rtl',
+    title: 'نام او استر بود',
+    subtitle: 'در ۲۲ مارس ۲۰۲۷، ۱۵ میلیون صدا در سراسر جهان در روزه، یادبود و همبستگی متحد می‌شوند.',
+    storyTitle: 'چرا «نام او استر بود»؟',
+    storyBody: 'با الهام از داستان ماندگار شجاعت، هویت و اتحاد در برابر سختی‌ها، این روز میلیون‌ها نفر را در سراسر جهان گرد هم می‌آورد تا با هم روزه بگیرند و صدای خود را به اشتراک بگذارند.',
+    counterLabel: 'صداها و تعهدات ثبت‌شده',
+    fastTimesHeader: 'زمان‌های محلی روزه شما (۲۲ مارس ۲۰۲۷)',
+    starts: 'آغاز روزه (سپیده‌دم)',
+    ends: 'پایان روزه (شب‌هنگام)',
+    nameLabel: 'نام و نام خانوادگی',
+    countryLabel: 'کشور محل سکونت',
+    durationLabel: 'چه مدت روزه خواهید گرفت؟',
+    durationOptions: ['روزه کامل (از سپیده‌دم تا شب‌هنگام)', 'نیم روز', 'تا ظهر', 'سفارشی / معافیت پزشکی'],
+    videoLabel: 'اشتراک‌گذاری پیام ویدیویی ۱۰ ثانیه‌ای (حداکثر ۱۰ ثانیه)',
+    submitBtn: 'افزودن صدا و ویدیوی من',
+    errorDuration: 'مدت ویدیو باید ۱۰ ثانیه یا کمتر باشد.',
+    successMsg: 'سپاسگزاریم. صدا و ویدیوی شما به ۱۵ میلیون نفر افزوده شد.',
+    galleryTitle: 'صداهایی از سراسر جهان',
+    noVideos: 'اولین نفری باشید که یک پیام ویدیویی ۱۰ ثانیه‌ای به اشتراک می‌گذارد.'
   }
 };
 
@@ -265,7 +349,7 @@ export default function FastOfEstherApp() {
 
   return (
     <main dir={t.dir} className="max-w-4xl mx-auto p-6 font-sans">
-          {/* Language Switcher */}
+               {/* Language Switcher */}
       <div className="flex flex-wrap justify-end gap-2 mb-6">
         <button onClick={() => setLang('en')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">English</button>
         <button onClick={() => setLang('he')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">עברית</button>
@@ -274,6 +358,10 @@ export default function FastOfEstherApp() {
         <button onClick={() => setLang('fr')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Français</button>
         <button onClick={() => setLang('ru')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Русский</button>
         <button onClick={() => setLang('pt')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Português</button>
+        <button onClick={() => setLang('de')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Deutsch</button>
+        <button onClick={() => setLang('it')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Italiano</button>
+        <button onClick={() => setLang('ar')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">العربية</button>
+        <button onClick={() => setLang('fa')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">فارسی</button>
       </div>
 
 
