@@ -5,13 +5,11 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { getFastOfEsther2027 } from '../utils/getFastTimes';
 
-// Initialize Supabase (Replace with your free project keys)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-// Translation Dictionary (Add French, Russian, Portuguese, etc. here)
 const translations = {
   en: {
     dir: 'ltr',
@@ -28,7 +26,9 @@ const translations = {
     videoLabel: 'Upload 10-Second Video (Max 10s)',
     submitBtn: 'Register & Upload Video',
     errorDuration: 'Video must be 10 seconds or shorter.',
-    successMsg: 'Thank you! Your pledge and video have been counted.'
+    successMsg: 'Thank you! Your pledge and video have been counted.',
+    galleryTitle: 'Recent Voices Around the World',
+    noVideos: 'Be the first to share a 10-second video pledge!'
   },
   he: {
     dir: 'rtl',
@@ -45,7 +45,9 @@ const translations = {
     videoLabel: 'העלאת סרטון עד 10 שניות',
     submitBtn: 'הרשמה והעלאת סרטון',
     errorDuration: 'אורך הסרטון חייב להיות 10 שניות או פחות.',
-    successMsg: 'תודה! ההשתתפות והסרטון שלך נוספו לספירה.'
+    successMsg: 'תודה! ההשתתפות והסרטון שלך נוספו לספירה.',
+    galleryTitle: 'קולות אחרונים מרחבי העולם',
+    noVideos: 'היו הראשונים לשתף סרטון התחייבות של 10 שניות!'
   },
   es: {
     dir: 'ltr',
@@ -62,7 +64,9 @@ const translations = {
     videoLabel: 'Subir Video de 10 Segundos (Máx. 10s)',
     submitBtn: 'Registrar y Subir Video',
     errorDuration: 'El video debe durar 10 segundos o menos.',
-    successMsg: '¡Gracias! Tu registro y video han sido contados.'
+    successMsg: '¡Gracias! Tu registro y video han sido contados.',
+    galleryTitle: 'Voces Recientes Alrededor del Mundo',
+    noVideos: '¡Sé el primero en compartir un video de 10 segundos!'
   }
 };
 
@@ -71,6 +75,7 @@ export default function FastOfEstherApp() {
   const t = translations[lang];
 
   const [count, setCount] = useState(0);
+  const [recentVideos, setRecentVideos] = useState([]);
   const [times, setTimes] = useState(null);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -80,17 +85,33 @@ export default function FastOfEstherApp() {
   const [videoFile, setVideoFile] = useState(null);
   const [status, setStatus] = useState({ loading: false, message: '', error: false });
 
-  // 1. Fetch Live Participant Count
-  const fetchCount = async () => {
+  // 1. Fetch Live Participant Count & Recent Videos
+  const fetchDashboardData = async () => {
     const { count: totalRows } = await supabase
       .from('participants')
       .select('*', { count: 'exact', head: true });
     if (totalRows !== null) setCount(totalRows);
+
+    // Fetch latest 12 entries that include a video
+    const { data: videoRows } = await supabase
+      .from('participants')
+      .select('id, full_name, country, fast_duration, video_url')
+      .not('video_url', 'is', null)
+      .order('created_at', { ascending: false })
+      .limit(12);
+
+    if (videoRows) {
+      const videosWithUrls = videoRows.map((row) => {
+        const { data } = supabase.storage.from('videos').getPublicUrl(row.video_url);
+        return { ...row, publicUrl: data.publicUrl };
+      });
+      setRecentVideos(videosWithUrls);
+    }
   };
 
   // 2. Detect Browser Location & Fetch March 22, 2027 Fast Times
   useEffect(() => {
-    fetchCount();
+    fetchDashboardData();
 
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(async (pos) => {
@@ -107,7 +128,7 @@ export default function FastOfEstherApp() {
 
   // 3. Enforce Strict 10-Second Video Limit in Browser
   const handleVideoChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files?.[0];
     if (!file) return;
 
     const videoEl = document.createElement('video');
@@ -133,7 +154,6 @@ export default function FastOfEstherApp() {
 
     let uploadedVideoUrl = null;
 
-    // Upload video to Supabase Storage bucket named 'videos' (or swap with Cloudflare R2 / YouTube API)
     if (videoFile) {
       const fileName = `${Date.now()}-${videoFile.name.replace(/\s+/g, '_')}`;
       const { data: uploadData, error: uploadError } = await supabase.storage
@@ -147,7 +167,6 @@ export default function FastOfEstherApp() {
       uploadedVideoUrl = uploadData.path;
     }
 
-    // Save registration details to database
     const { error: dbError } = await supabase.from('participants').insert([
       {
         full_name: formData.fullName,
@@ -164,21 +183,21 @@ export default function FastOfEstherApp() {
       setStatus({ loading: false, message: t.successMsg, error: false });
       setFormData({ fullName: '', country: '', fastDuration: t.durationOptions[0] });
       setVideoFile(null);
-      fetchCount(); // Update live counter immediately
+      fetchDashboardData(); // Refresh counter and video gallery immediately
     }
   };
 
   return (
-    <main dir={t.dir} className="max-w-2xl mx-auto p-6 font-sans">
+    <main dir={t.dir} className="max-w-4xl mx-auto p-6 font-sans">
       {/* Language Switcher */}
       <div className="flex justify-end gap-2 mb-6">
-        <button onClick={() => setLang('en')} className="px-3 py-1 border rounded">English</button>
-        <button onClick={() => setLang('he')} className="px-3 py-1 border rounded">עברית</button>
-        <button onClick={() => setLang('es')} className="px-3 py-1 border rounded">Español</button>
+        <button onClick={() => setLang('en')} className="px-3 py-1 border rounded bg-white">English</button>
+        <button onClick={() => setLang('he')} className="px-3 py-1 border rounded bg-white">עברית</button>
+        <button onClick={() => setLang('es')} className="px-3 py-1 border rounded bg-white">Español</button>
       </div>
 
       {/* Header & Live Counter */}
-      <header className="text-center mb-8">
+      <header className="text-center mb-8 max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-2">{t.title}</h1>
         <p className="text-gray-600 mb-6">{t.subtitle}</p>
         
@@ -194,7 +213,7 @@ export default function FastOfEstherApp() {
 
       {/* Worldwide Fast Times Display */}
       {times && (
-        <section className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 text-center">
+        <section className="max-w-2xl mx-auto bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 text-center">
           <h2 className="font-semibold text-amber-900 mb-2">{t.fastTimesHeader}</h2>
           <div className="flex justify-around text-lg">
             <div><strong>{t.starts}:</strong> {times.fastStarts}</div>
@@ -204,7 +223,7 @@ export default function FastOfEstherApp() {
       )}
 
       {/* Registration & Video Upload Form */}
-      <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 border rounded-xl shadow-sm">
+      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4 bg-white p-6 border rounded-xl shadow-sm mb-12">
         <div>
           <label className="block font-medium mb-1">{t.nameLabel}</label>
           <input
@@ -245,26 +264,3 @@ export default function FastOfEstherApp() {
           <input
             type="file"
             accept="video/*"
-            onChange={handleVideoChange}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={status.loading}
-          className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700"
-        >
-          {status.loading ? '...' : t.submitBtn}
-        </button>
-
-        {status.message && (
-          <p className={`text-center font-medium ${status.error ? 'text-red-600' : 'text-green-600'}`}>
-            {status.message}
-          </p>
-        )}
-      </form>
-    </main>
-  );
-}
-
