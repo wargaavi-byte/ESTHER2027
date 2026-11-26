@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Global Fast of Esther — March 22, 2027',
+  title: 'Her Name Was Esther',
   description: 'Join 15 million voices worldwide in unity and solidarity.',
 };
 
