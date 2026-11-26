@@ -13,7 +13,7 @@ const supabase = createClient(
 const translations = {
   en: {
     dir: 'ltr',
-    title: 'Global Fast of Esther — March 22, 2027',
+    title: 'Her Name Was Esther',
     subtitle: 'Join 15 million voices worldwide in unity and solidarity.',
     counterLabel: 'Videos & Pledges Recorded',
     fastTimesHeader: 'Your Local Fast Times (March 22, 2027)',
@@ -32,7 +32,7 @@ const translations = {
   },
   he: {
     dir: 'rtl',
-    title: 'תענית אסתר העולמית — 22 במרץ 2027',
+    title: 'קראו לה אסתר',
     subtitle: 'הצטרפו ל-15 מיליון קולות ברחבי העולם באחדות.',
     counterLabel: 'סרטונים והתחייבויות שנרשמו',
     fastTimesHeader: 'זמני הצום המקומיים שלך (י״ג באדר ב׳ תשפ״ז)',
@@ -51,7 +51,7 @@ const translations = {
   },
   es: {
     dir: 'ltr',
-    title: 'Ayuno Global de Ester — 22 de Marzo de 2027',
+    title: 'Su Nombre Era Ester',
     subtitle: 'Únete a 15 millones de voces en todo el mundo.',
     counterLabel: 'Videos y Registros Completados',
     fastTimesHeader: 'Tus Horarios Locales de Ayuno (22 de Marzo, 2027)',
