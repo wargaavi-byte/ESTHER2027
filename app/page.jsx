@@ -1,173 +1,259 @@
+```jsx
 // app/page.jsx
 'use client';
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { getFastOfEsther2027 } from '../utils/getFastTimes';
+import { translations } from '../utils/translations';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-const translations = {
-  en: {
-    dir: 'ltr',
-    title: 'Her Name Was Esther',
-    subtitle: 'On March 22, 2027, 15 million voices unite worldwide in fasting, remembrance, and solidarity.',
-    storyTitle: 'Why "Her Name Was Esther"?',
-    storyBody: 'Inspired by a timeless story of courage, identity, and collective unity in the face of adversity, March 22, 2027 brings 15 million voices together across every time zone in shared fasting and solidarity.',
-    counterLabel: 'Voices & Pledges Recorded',
-    fastTimesHeader: 'Your Local Fast Times (March 22, 2027)',
-    starts: 'Fast Begins (Dawn)',
-    ends: 'Fast Ends (Nightfall)',
-    nameLabel: 'Full Name',
-    countryLabel: 'Country of Residence',
-    durationLabel: 'How Long Will You Fast?',
-    durationOptions: ['Full Fast (Dawn to Nightfall)', 'Half Day', 'Until Noon', 'Custom / Medical Exemption'],
-    videoLabel: 'Share a 10-Second Video Message (Max 10s)',
-    submitBtn: 'Add My Voice & Video',
-    errorDuration: 'Video must be 10 seconds or shorter.',
-    successMsg: 'Thank you. Your voice and video have been added to the 15 million.',
-    galleryTitle: 'Voices From Around the World',
-    noVideos: 'Be the first to share a 10-second video message.'
-  },
-  he: {
-    dir: 'rtl',
-    title: 'קראו לה אסתר',
-    subtitle: 'ב-22 במרץ 2027 (י״ג באדר ב׳ תשפ״ז), 15 מיליון קולות מתאחדים ברחבי העולם בצום, זיכרון וסולידריות.',
-    storyTitle: 'למה "קראו לה אסתר"?',
-    storyBody: 'בהשראת סיפור נצחי של אומץ, זהות ואחדות מול אתגרים, ה-22 במרץ 2027 מאחד 15 מיליון קולות מכל רחבי העולם בצום משותף ובסולידריות.',
-    counterLabel: 'קולות והתחייבויות שנרשמו',
-    fastTimesHeader: 'זמני הצום המקומיים שלך (22 במרץ 2027)',
-    starts: 'תחילת הצום (עלות השחר)',
-    ends: 'צאת הצום (צאת הכוכבים)',
-    nameLabel: 'שם מלא',
-    countryLabel: 'מדינת מגורים',
-    durationLabel: 'משך הצום המתוכנן',
-    durationOptions: ['צום מלא (מעלות השחר עד צאת הכוכבים)', 'חצי יום', 'עד חנות היום', 'מותאם אישית / פטור רפואי'],
-    videoLabel: 'שתפו סרטון של 10 שניות (מקסימום 10 שנ׳)',
-    submitBtn: 'הוספת הקול והסרטון שלי',
-    errorDuration: 'אורך הסרטון חייב להיות 10 שניות או פחות.',
-    successMsg: 'תודה. הקול והסרטון שלך נוספו ל-15 המיליון.',
-    galleryTitle: 'קולות מרחבי העולם',
-    noVideos: 'היו הראשונים לשתף מסר מצולם של 10 שניות.'
-  },
-  yi: {
-    dir: 'rtl',
-    title: 'איר נאָמען איז געווען אסתר',
-    subtitle: 'דעם 22סטן מערץ 2027 (י״ג אדר ב׳ תשפ״ז), פֿאַראייניקן זיך 15 מיליאָן שטימען איבער דער גאָרער וועלט אין תּענית, זכּרון און סאָלידאַריטעט.',
-    storyTitle: 'פֿאַרוואָס "איר נאָמען איז געווען אסתר"?',
-    storyBody: 'אינספּירירט פֿון אַן אייביקער געשיכטע פֿון מוט, אידענטיטעט און אחדות, ברענגט דער 22סטער מערץ 2027 צוזאַמען 15 מיליאָן שטימען איבער דער גאָרער וועלט אין אַ געמיינזאַמען תּענית.',
-    counterLabel: 'רעגיסטרירטע שטימען און ווידעאָס',
-    fastTimesHeader: 'אייערע לאָקאַלע תּענית צייטן (22 מערץ 2027)',
-    starts: 'אָנהייב פֿון תּענית (עלות השחר)',
-    ends: 'סוף פֿון תּענית (צאת הכוכבים)',
-    nameLabel: 'פֿולער נאָמען',
-    countryLabel: 'לאַנד פֿון וואוינונג',
-    durationLabel: 'ווי לאַנג וועט איר פֿאַסטן?',
-    durationOptions: ['פֿולער תּענית (פֿון עלות השחר ביז צאת הכוכבים)', 'אַ האַלבן טאָג', 'ביז מיטאָג', 'אייגענע צייט / מעדיצינישע באַפֿרייאונג'],
-    videoLabel: 'אַרויפֿלאָדן אַ 10-סעקונדע ווידעאָ (מאַקס. 10ס)',
-    submitBtn: 'צולייגן מיין שטימע און ווידעאָ',
-    errorDuration: 'דער ווידעאָ מוז זיין 10 סעקונדעס אָדער קירצער.',
-    successMsg: 'אַ דאַנק. אייער שטימע און ווידעאָ זענען צוגעלייגט געוואָרן צו די 15 מיליאָן.',
-    galleryTitle: 'שטימען פֿון דער גאָרער וועלט',
-    noVideos: 'זייט דער ערשטער צו טיילן אַ 10-סעקונדע ווידעאָ.'
-  },
-  es: {
-    dir: 'ltr',
-    title: 'Su Nombre Era Ester',
-    subtitle: 'El 22 de marzo de 2027, 15 millones de voces se unen en todo el mundo en ayuno, memoria y solidaridad.',
-    storyTitle: '¿Por qué "Su Nombre Era Ester"?',
-    storyBody: 'Inspirado en una historia eterna de valentía, identidad y unidad frente a la adversidad, el 22 de marzo de 2027 reúne a 15 millones de voces en todas las zonas horarias en ayuno y solidaridad compartida.',
-    counterLabel: 'Voces y Compromisos Registrados',
-    fastTimesHeader: 'Tus Horarios Locales de Ayuno (22 de Marzo, 2027)',
-    starts: 'Inicio del Ayuno (Alba)',
-    ends: 'Fin del Ayuno (Anochecer)',
-    nameLabel: 'Nombre Completo',
-    countryLabel: 'País de Residencia',
-    durationLabel: '¿Cuánto tiempo ayunarás?',
-    durationOptions: ['Ayuno Completo (Alba a Anochecer)', 'Medio Día', 'Hasta el Mediodía', 'Personalizado / Exención Médica'],
-    videoLabel: 'Comparte un Video de 10 Segundos (Máx. 10s)',
-    submitBtn: 'Sumar Mi Voz y Video',
-    errorDuration: 'El video debe durar 10 segundos o menos.',
-    successMsg: 'Gracias. Tu voz y tu video se han sumado a los 15 millones.',
-    galleryTitle: 'Voces de Todo el Mundo',
-    noVideos: 'Sé el primero en compartir un mensaje en video de 10 segundos.'
-  },
-  fr: {
-    dir: 'ltr',
-    title: 'Elle S’appelait Esther',
-    subtitle: 'Le 22 mars 2027, 15 millions de voix s’unissent dans le monde entier dans le jeûne, le souvenir et la solidarité.',
-    storyTitle: 'Pourquoi « Elle S’appelait Esther » ?',
-    storyBody: 'Inspiré par une histoire intemporelle de courage, d’identité et d’unité face à l’adversité, le 22 mars 2027 rassemble 15 millions de voix à travers le monde dans un jeûne et une solidarité partagés.',
-    counterLabel: 'Voix et Engagements Enregistrés',
-    fastTimesHeader: 'Vos Horaires Locaux de Jeûne (22 Mars 2027)',
-    starts: 'Début du Jeûne (Aube)',
-    ends: 'Fin du Jeûne (Tombée de la nuit)',
-    nameLabel: 'Nom Complet',
-    countryLabel: 'Pays de Résidence',
-    durationLabel: 'Combien de temps jeûnerez-vous ?',
-    durationOptions: ['Jeûne Complet (Aube à la tombée de la nuit)', 'Demi-journée', 'Jusqu’à Midi', 'Personnalisé / Exemption Médicale'],
-    videoLabel: 'Partager un Message Vidéo de 10 Secondes (Max 10s)',
-    submitBtn: 'Ajouter Ma Voix et Ma Vidéo',
-    errorDuration: 'La vidéo doit durer 10 secondes ou moins.',
-    successMsg: 'Merci. Votre voix et votre vidéo ont été ajoutées aux 15 millions.',
-    galleryTitle: 'Voix du Monde Entier',
-    noVideos: 'Soyez le premier à partager un message vidéo de 10 secondes.'
-  },
-  ru: {
-    dir: 'ltr',
-    title: 'Её Звали Эстер',
-    subtitle: '22 марта 2027 года 15 миллионов голосов по всему миру объединятся в посте, памяти и солидарности.',
-    storyTitle: 'Почему «Её Звали Эстер»?',
-    storyBody: 'Вдохновлённый вечной историей мужества, идентичности и единства перед лицом испытаний, день 22 марта 2027 года объединяет 15 миллионов голосов во всех часовых поясах в общем посте и солидарности.',
-    counterLabel: 'Записано Голосов и Обязательств',
-    fastTimesHeader: 'Ваше Местное Время Поста (22 Марта 2027)',
-    starts: 'Начало Поста (Рассвет)',
-    ends: 'Окончание Поста (Выход звёзд)',
-    nameLabel: 'Полное Имя',
-    countryLabel: 'Страна Проживания',
-    durationLabel: 'Как долго вы будете поститься?',
-    durationOptions: ['Полный пост (от рассвета до выхода звёзд)', 'Полдня', 'До полудня', 'Индивидуально / По медицинским показаниям'],
-    videoLabel: 'Загрузить 10-секундное видео (Макс. 10 сек)',
-    submitBtn: 'Добавить Мой Голос и Видео',
-    errorDuration: 'Длительность видео должна быть не более 10 секунд.',
-    successMsg: 'Спасибо. Ваш голос и видео добавлены к 15 миллионам.',
-    galleryTitle: 'Голоса со Всего Мира',
-    noVideos: 'Станьте первым, кто поделится 10-секундным видеообращением.'
-  },
-  pt: {
-    dir: 'ltr',
-    title: 'O Nome Dela Era Ester',
-    subtitle: 'Em 22 de março de 2027, 15 milhões de vozes se unem em todo o mundo em jejum, memória e solidariedade.',
-    storyTitle: 'Por que "O Nome Dela Era Ester"?',
-    storyBody: 'Inspirado em uma história atemporal de coragem, identidade e união diante da adversidade, 22 de março de 2027 reúne 15 milhões de vozes em todos os fusos horários em jejum e solidariedade.',
-    counterLabel: 'Vozes e Compromissos Registrados',
-    fastTimesHeader: 'Seus Horários Locais de Jejum (22 de Março de 2027)',
-    starts: 'Início do Jejum (Alvorada)',
-    ends: 'Fim do Jejum (Anoitecer)',
-    nameLabel: 'Nome Completo',
-    countryLabel: 'País de Residência',
-    durationLabel: 'Por quanto tempo você vai jejuar?',
-    durationOptions: ['Jejum Complet (Alvorada ao Anoitecer)', 'Meio Dia', 'Até o Meio-Dia', 'Personalizado / Isenção Médica'],
-    videoLabel: 'Compartilhar Vídeo de 10 Segundos (Máx. 10s)',
-    submitBtn: 'Adicionar Minha Voz e Vídeo',
-    errorDuration: 'O vídeo deve ter 10 segundos ou menos.',
-    successMsg: 'Obrigado. Sua voz e seu vídeo foram somados aos 15 milhões.',
-    galleryTitle: 'Vozes de Todo o Mundo',
-    noVideos: 'Seja o primeiro a compartilhar uma mensagem em vídeo de 10 segundos.'
-  },
-  de: {
-    dir: 'ltr',
-    title: 'Ihr Name War Esther',
-    subtitle: 'Am 22. März 2027 vereinen sich weltweit 15 Millionen Stimmen in Fasten, Erinnerung und Solidarität.',
-    storyTitle: 'Warum „Ihr Name War Esther“?',
-    storyBody: 'Inspiriert von der zeitlosen Geschichte von Mut, Identität und gemeinsamem Handeln in der Not ruft der 22. März 2027 Menschen weltweit dazu auf, gemeinsam innezuhalten, zu fasten und ihre Stimme zu erheben.',
-    counterLabel: 'Registrierte Stimmen & Zusagen',
-    fastTimesHeader: 'Ihre Lokalen Fastenzeiten (22. März 2027)',
-    starts: 'Beginn des Fastens (Morgendämmerung)',
-    ends: 'Ende des Fastens (Einbruch der Nacht)',
-    nameLabel: 'Vollständiger Name',
-    countryLabel: 'Wohnsitzland',
-    durationLabel: 'Wie lange werden Sie fasten?',
+export default function FastOfEstherApp() {
+  const [lang, setLang] = useState('en');
+  const t = translations[lang];
+
+  const [count, setCount] = useState(0);
+  const [recentVideos, setRecentVideos] = useState([]);
+  const [times, setTimes] = useState(null);
+  const [formData, setFormData] = useState({
+    fullName: '',
+    country: '',
+    fastDuration: translations.en.durationOptions,
+  });
+  const [videoFile, setVideoFile] = useState(null);
+  const [status, setStatus] = useState({ loading: false, message: '', error: false });
+
+  const fetchDashboardData = async () => {
+    const { count: totalRows } = await supabase
+      .from('participants')
+      .select('*', { count: 'exact', head: true });
+    if (totalRows !== null) setCount(totalRows);
+
+    const { data: videoRows } = await supabase
+      .from('participants')
+      .select('id, full_name, country, fast_duration, video_url')
+      .not('video_url', 'is', null)
+      .order('created_at', { ascending: false })
+      .limit(12);
+
+    if (videoRows) {
+      const videosWithUrls = videoRows.map((row) => {
+        const { data } = supabase.storage.from('videos').getPublicUrl(row.video_url);
+        return { ...row, publicUrl: data.publicUrl };
+      });
+      setRecentVideos(videosWithUrls);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const fastData = await getFastOfEsther2027(
+          pos.coords.latitude,
+          pos.coords.longitude,
+          tz
+        );
+        setTimes(fastData);
+      });
+    }
+  }, []);
+
+  const handleLanguageChange = (newLang) => {
+    setLang(newLang);
+    setFormData((prev) => ({
+      ...prev,
+      fastDuration: translations[newLang].durationOptions,
+    }));
+  };
+
+  const handleVideoChange = (e) => {
+    const file = e.target.files ? e.target.files : null;
+    if (!file) return;
+
+    const videoEl = document.createElement('video');
+    videoEl.preload = 'metadata';
+    videoEl.onloadedmetadata = () => {
+      window.URL.revokeObjectURL(videoEl.src);
+      if (videoEl.duration > 10.5) {
+        setStatus({ loading: false, message: t.errorDuration, error: true });
+        e.target.value = '';
+        setVideoFile(null);
+      } else {
+        setStatus({ loading: false, message: '', error: false });
+        setVideoFile(file);
+      }
+    };
+    videoEl.src = URL.createObjectURL(file);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ loading: true, message: '', error: false });
+
+    let uploadedVideoUrl = null;
+
+    if (videoFile) {
+      const fileName = `${Date.now()}-${videoFile.name.replace(/\s+/g, '_')}`;
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('videos')
+        .upload(fileName, videoFile);
+
+      if (uploadError) {
+        setStatus({ loading: false, message: uploadError.message, error: true });
+        return;
+      }
+      uploadedVideoUrl = uploadData.path;
+    }
+
+    const { error: dbError } = await supabase.from('participants').insert([
+      {
+        full_name: formData.fullName,
+        country: formData.country,
+        fast_duration: formData.fastDuration,
+        video_url: uploadedVideoUrl,
+        language: lang,
+      },
+    ]);
+
+    if (dbError) {
+      setStatus({ loading: false, message: dbError.message, error: true });
+    } else {
+      setStatus({ loading: false, message: t.successMsg, error: false });
+      setFormData({ fullName: '', country: '', fastDuration: t.durationOptions });
+      setVideoFile(null);
+      fetchDashboardData();
+    }
+  };
+
+  return (
+    <main dir={t.dir} className="max-w-4xl mx-auto p-6 font-sans">
+      <div className="flex flex-wrap justify-end gap-2 mb-6">
+        <button type="button" onClick={() => handleLanguageChange('en')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">English</button>
+        <button type="button" onClick={() => handleLanguageChange('he')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">עברית</button>
+        <button type="button" onClick={() => handleLanguageChange('yi')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">ייִדיש</button>
+        <button type="button" onClick={() => handleLanguageChange('es')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Español</button>
+        <button type="button" onClick={() => handleLanguageChange('fr')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Français</button>
+        <button type="button" onClick={() => handleLanguageChange('ru')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Русский</button>
+        <button type="button" onClick={() => handleLanguageChange('pt')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Português</button>
+        <button type="button" onClick={() => handleLanguageChange('de')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Deutsch</button>
+        <button type="button" onClick={() => handleLanguageChange('it')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">Italiano</button>
+        <button type="button" onClick={() => handleLanguageChange('ar')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">العربية</button>
+        <button type="button" onClick={() => handleLanguageChange('fa')} className="px-3 py-1 border rounded bg-white hover:bg-gray-100">فارسی</button>
+      </div>
+
+      <header className="text-center mb-8 max-w-2xl mx-auto">
+        <h1 className="text-3xl font-bold mb-2">{t.title}</h1>
+        <p className="text-gray-600 mb-6">{t.subtitle}</p>
+        
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+          <div className="text-4xl font-extrabold text-blue-900">
+            {count.toLocaleString()} / 15,000,000
+          </div>
+          <div className="text-sm uppercase tracking-wide text-blue-700 mt-1">
+            {t.counterLabel}
+          </div>
+        </div>
+      </header>
+
+      <section className="max-w-2xl mx-auto bg-white border border-gray-200 rounded-xl p-6 mb-8 shadow-sm text-center">
+        <h2 className="text-xl font-bold text-gray-900 mb-2">{t.storyTitle}</h2>
+        <p className="text-gray-700 leading-relaxed">{t.storyBody}</p>
+      </section>
+
+      {times && (
+        <section className="max-w-2xl mx-auto bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 text-center">
+          <h2 className="font-semibold text-amber-900 mb-2">{t.fastTimesHeader}</h2>
+          <div className="flex justify-around text-lg">
+            <div><strong>{t.starts}:</strong> {times.fastStarts}</div>
+            <div><strong>{t.ends}:</strong> {times.fastEnds}</div>
+          </div>
+        </section>
+      )}
+
+      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4 bg-white p-6 border rounded-xl shadow-sm mb-12">
+        <div>
+          <label className="block font-medium mb-1">{t.nameLabel}</label>
+          <input
+            type="text"
+            required
+            value={formData.fullName}
+            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            className="w-full border p-2 rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">{t.countryLabel}</label>
+          <input
+            type="text"
+            required
+            value={formData.country}
+            onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+            className="w-full border p-2 rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">{t.durationLabel}</label>
+          <select
+            value={formData.fastDuration}
+            onChange={(e) => setFormData({ ...formData, fastDuration: e.target.value })}
+            className="w-full border p-2 rounded"
+          >
+            {t.durationOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">{t.videoLabel}</label>
+          <input
+            type="file"
+            accept="video/*"
+            onChange={handleVideoChange}
+            className="w-full border p-2 rounded"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={status.loading}
+          className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700"
+        >
+          {status.loading ? '...' : t.submitBtn}
+        </button>
+
+        {status.message && (
+          <p className={`text-center font-medium ${status.error ? 'text-red-600' : 'text-green-600'}`}>
+            {status.message}
+          </p>
+        )}
+      </form>
+
+      <section className="mt-10">
+        <h2 className="text-2xl font-bold text-center mb-6">{t.galleryTitle}</h2>
+        
+        {recentVideos.length === 0 ? (
+          <p className="text-center text-gray-500">{t.noVideos}</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {recentVideos.map((item) => (
+{item.full_name}
+{item.country}
+{item.fast_duration}
+
+
+))}
+
+)}
+
+);
+}
