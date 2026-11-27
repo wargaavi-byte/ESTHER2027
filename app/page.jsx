@@ -352,7 +352,6 @@ export default function FastOfEstherApp() {
                     {item.fast_duration}
                   </span>
                 </div>
-              </div>
             ))}
           </div>
         )}
