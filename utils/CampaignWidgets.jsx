@@ -110,3 +110,75 @@ export function SocialShareBar() {
     </div>
   );
 }
+export function HiddenBlueprintCard() {
+  return (
+    <section className="max-w-2xl mx-auto bg-white/95 backdrop-blur border-t-4 border-purple-600 rounded-2xl p-6 sm:p-8 mb-8 shadow-md text-left">
+      <h2
+        style={{ fontFamily: 'var(--font-cinzel), serif' }}
+        className="text-2xl sm:text-3xl font-extrabold text-indigo-950 mb-4 text-center"
+      >
+        The Hidden Blueprint: Why the Story of Purim Still Matters
+      </h2>
+
+      <div className="space-y-4 text-gray-700 leading-relaxed text-base">
+        <p>
+          On the surface, the Book of Esther reads like a political thriller set in ancient Persia. There is a volatile king, a power-hungry advisor, a secret identity, and a dramatic last-minute rescue. Unlike the story of Passover—which features parting seas, plagues, and open miracles—the Book of Esther is famous for one striking omission: God’s name is never mentioned once.
+        </p>
+        <p>
+          For many secular readers, that absence makes the story instantly relatable. It feels less like a distant myth and more like real history, where outcomes depend on human courage, timing, and strategy rather than divine intervention. Yet, according to Jewish wisdom, the complete absence of God’s name is the entire point of the story.
+        </p>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            1. The Power of What Is Hidden
+          </h3>
+          <p className="mb-3">
+            The name &ldquo;Esther&rdquo; shares a Hebrew root with the word <em>hester</em>, meaning &ldquo;hidden.&rdquo; In the Torah, this points to a profound idea about how the world works: the most important forces shaping our lives are often operating behind the scenes.
+          </p>
+          <p>
+            In life, we rarely see flashing neon signs telling us what to do or proving that everything will work out. Instead, we experience coincidences, unexpected turns, and moments where things quietly fall into place. Purim teaches that what looks like &ldquo;luck&rdquo; or random chance—a king having insomnia on the exact right night, an orphan rising to the throne just before a crisis—is actually a connected chain of events. The Torah perspective isn&apos;t asking you to wait for a miracle; it&apos;s inviting you to look closer at the hidden patterns in everyday reality.
+          </p>
+        </div>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            2. Stepping Up When No One Is Watching
+          </h3>
+          <p className="mb-3">
+            Because there are no open miracles in the Purim story, human beings have to do the heavy lifting. When the Jewish people face annihilation, Esther doesn&apos;t sit back and pray for the sky to split open. She steps into the arena, risks her life by approaching the king uninvited, and uses sharp political intuition to outmaneuver her enemies.
+          </p>
+          <blockquote className="my-3 pl-4 border-l-4 border-amber-400 italic text-indigo-950 font-medium bg-amber-50/70 py-2 pr-3 rounded-r-lg">
+            &ldquo;Who knows if it was for a moment just like this that you attained your royal position?&rdquo;
+          </blockquote>
+          <p>
+            Her uncle, Mordechai, delivers that defining line of the entire story. For a secular audience, this is a timeless call to personal responsibility. You don&apos;t need to be religious to recognize that your unique skills, platform, or privileges were given to you for a reason. When a crisis hits, the Torah&apos;s message is clear: you are the miracle you&apos;ve been waiting for.
+          </p>
+        </div>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            3. Embracing Complexity Over Perfection
+          </h3>
+          <p className="mb-3">
+            Traditional heroes are often flawless, almost untouchable figures. Esther and Mordechai are anything but. Esther hides her Jewish identity to survive in a toxic royal court; Mordechai refuses to bow to a tyrant, sparking a massive crisis that puts his entire community in danger. They operate in the messy, morally gray realities of politics and assimilation.
+          </p>
+          <p>
+            Purim celebrates the fact that you don&apos;t have to be a saint—or live a perfectly traditional life—to play a vital role in Jewish history. Even when your identity feels complicated, hidden, or disconnected from tradition, your actions still carry immense weight.
+          </p>
+        </div>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            4. Turning Anxiety into Celebration
+          </h3>
+          <p className="mb-3">
+            Purim isn&apos;t a solemn day of fasting and regret; it’s a loud, joyful celebration marked by costumes, feasts, and giving to others. The masks we wear on Purim mirror the central theme of the story: things are rarely what they seem on the outside. Beneath the surface of chaos, fear, and assimilation lies resilience, connection, and purpose.
+          </p>
+          <p className="font-medium text-indigo-950">
+            Ultimately, the Torah&apos;s message of Purim is deeply empowering: even when the universe feels silent, your choices matter, your timing is never an accident, and you have the power to flip the script.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
