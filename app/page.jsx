@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { getFastOfEsther2027 } from '../utils/getFastTimes';
 import { translations } from '../utils/translations';
+import { ManualCitySelector, SocialShareBar } from '../utils/CampaignWidgets';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -31,9 +32,10 @@ export default function FastOfEstherApp() {
       .select('*', { count: 'exact', head: true });
     if (totalRows !== null) setCount(totalRows);
 
-    const { data: videoRows } = await supabase
+       const { data: videoRows } = await supabase
       .from('participants')
       .select('id, full_name, country, fast_duration, video_url')
+      .eq('approved', true)
       .not('video_url', 'is', null)
       .order('created_at', { ascending: false })
       .limit(12);
@@ -187,20 +189,28 @@ export default function FastOfEstherApp() {
         <p className="text-gray-700 leading-relaxed">{t.storyBody}</p>
       </section>
 
-      {/* Sunrise-to-Sunset Fast Times Card */}
-      {times && (
-        <section className="max-w-2xl mx-auto bg-gradient-to-r from-amber-100 via-orange-100 to-rose-100 border border-amber-300 rounded-2xl p-5 mb-8 text-center shadow-md">
-          <h2 className="font-bold text-amber-950 mb-3 text-lg">{t.fastTimesHeader}</h2>
-          <div className="flex flex-col sm:flex-row justify-around gap-3 text-lg">
-            <div className="bg-white/80 px-4 py-2 rounded-xl shadow-sm text-amber-900">
-              🌅 <strong>{t.starts}:</strong> {times.fastStarts}
-            </div>
-            <div className="bg-white/80 px-4 py-2 rounded-xl shadow-sm text-indigo-950">
-              ✨ <strong>{t.ends}:</strong> {times.fastEnds}
-            </div>
-          </div>
-        </section>
-      )}
+        {/* Sunrise-to-Sunset Fast Times Card + Manual City Selector */}
+   <section className="max-w-2xl mx-auto bg-gradient-to-r from-amber-100 via-orange-100 to-rose-100 border border-amber-300 rounded-2xl p-5 mb-8 text-center shadow-md">
+     <h2 className="font-bold text-amber-950 mb-3 text-lg">
+       {t.fastTimesHeader} {times?.locationName ? `(${times.locationName})` : ''}
+     </h2>
+     {times ? (
+       <div className="flex flex-col sm:flex-row justify-around gap-3 text-lg">
+         <div className="bg-white/80 px-4 py-2 rounded-xl shadow-sm text-amber-900">
+           🌅 <strong>{t.starts}:</strong> {times.fastStarts}
+         </div>
+         <div className="bg-white/80 px-4 py-2 rounded-xl shadow-sm text-indigo-950">
+           ✨ <strong>{t.ends}:</strong> {times.fastEnds}
+         </div>
+       </div>
+     ) : (
+       <p className="text-sm text-amber-900">Select your city below to view your March 22, 2027 fast times:</p>
+     )}
+     <ManualCitySelector onSelectTimes={setTimes} />
+   </section>
+
+   {/* Social Share Bar */}
+   <SocialShareBar />
 
       {/* Styled Registration & Video Form */}
       <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4 bg-white/95 p-7 border-t-4 border-indigo-600 rounded-2xl shadow-lg mb-14">
