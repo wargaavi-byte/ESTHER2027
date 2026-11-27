@@ -1,9 +1,10 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Her Name Was Esther — March 22, 2027',
+  title: 'HER NAME WAS ESTHER — March 22, 2027',
   description: 'On March 22, 2027, 15 million voices unite worldwide in fasting, remembrance, and solidarity.',
 };
+
 
 export default function RootLayout({ children }) {
   return (
