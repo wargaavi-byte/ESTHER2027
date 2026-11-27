@@ -255,3 +255,15 @@ export default function FastOfEstherApp() {
 {item.full_name}
 {item.country}
 {item.fast_duration}
+                  <div className="font-bold text-lg">{item.full_name}</div>
+                  <div className="text-sm text-gray-600">{item.country}</div>
+                  <div className="text-xs text-blue-700 mt-1 font-medium">{item.fast_duration}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
+  );
+}
