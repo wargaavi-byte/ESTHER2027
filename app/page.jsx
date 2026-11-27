@@ -351,6 +351,7 @@ export default function FastOfEstherApp() {
                   <span className="inline-block mt-2 px-2.5 py-0.5 text-xs font-semibold rounded-full bg-amber-100 text-amber-900">
                     {item.fast_duration}
                   </span>
+                  </div>
                 </div>
             ))}
           </div>
