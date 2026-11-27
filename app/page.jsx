@@ -255,11 +255,3 @@ export default function FastOfEstherApp() {
 {item.full_name}
 {item.country}
 {item.fast_duration}
-
-
-))}
-
-)}
-
-);
-}
