@@ -177,8 +177,11 @@ export default function FastOfEstherApp() {
             <span>13 Adar II 5787</span>
           </div>
 
-          {/* Main Title */}
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight mb-4 bg-gradient-to-r from-amber-200 via-amber-300 to-yellow-500 bg-clip-text text-transparent drop-shadow-sm">
+          {/* Main Title — Classic Engraved Roman/Royal Serif */}
+          <h1
+            style={{ fontFamily: 'var(--font-cinzel), serif' }}
+            className="text-4xl sm:text-6xl font-black tracking-wider mb-4 bg-gradient-to-r from-amber-200 via-amber-300 to-yellow-500 bg-clip-text text-transparent drop-shadow-sm"
+          >
             {t.title}
           </h1>
 
@@ -189,8 +192,11 @@ export default function FastOfEstherApp() {
             <span className="h-px w-12 bg-gradient-to-l from-transparent to-amber-400/70" />
           </div>
 
-          {/* Subtitle */}
-          <p className="text-indigo-100 text-lg sm:text-xl leading-relaxed mb-8 font-normal">
+          {/* Subtitle — Editorial Literary Serif */}
+          <p
+            style={{ fontFamily: 'var(--font-cormorant), serif' }}
+            className="text-indigo-100 text-xl sm:text-2xl leading-relaxed mb-8 font-medium"
+          >
             {t.subtitle}
           </p>
 
