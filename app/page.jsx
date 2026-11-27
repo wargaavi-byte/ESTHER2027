@@ -263,8 +263,7 @@ export default function FastOfEstherApp() {
       <SocialShareBar />
 
    {/* Social Share Bar */}
-   <SocialShareBar />
-
+  
       {/* Styled Registration & Video Form */}
       <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4 bg-white/95 p-7 border-t-4 border-indigo-600 rounded-2xl shadow-lg mb-14">
         <div>
