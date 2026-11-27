@@ -163,25 +163,68 @@ export default function FastOfEstherApp() {
         ))}
       </div>
 
-      {/* Royal Header & Vibrant Counter Banner */}
-      <header className="text-center mb-8 max-w-2xl mx-auto">
-        <div className="inline-block px-4 py-1 mb-3 text-xs font-bold tracking-widest uppercase rounded-full bg-amber-200/80 text-amber-900">
-          March 22, 2027 • 13 Adar II 5787
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 bg-gradient-to-r from-indigo-900 via-purple-800 to-amber-700 bg-clip-text text-transparent">
-          {t.title}
-        </h1>
-        <p className="text-gray-700 text-lg mb-6">{t.subtitle}</p>
-        
-        <div className="bg-gradient-to-r from-indigo-700 via-purple-700 to-indigo-800 text-white rounded-2xl p-7 shadow-xl border border-indigo-400/30">
-          <div className="text-4xl sm:text-5xl font-black tracking-tight text-amber-300 drop-shadow">
-            {count.toLocaleString()} / 15,000,000
+           {/* Royal Hero Banner */}
+      <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-900 text-white p-8 sm:p-12 mb-10 shadow-2xl border border-amber-400/30 text-center">
+        {/* Subtle Ambient Glow Orbs */}
+        <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-purple-500/25 blur-3xl" />
+
+        <div className="relative z-10 max-w-2xl mx-auto">
+          {/* Date & Hebrew Date Pill */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/40 shadow-sm">
+            <span>✨ March 22, 2027</span>
+            <span>•</span>
+            <span>13 Adar II 5787</span>
           </div>
-          <div className="text-sm uppercase tracking-widest text-indigo-100 mt-2 font-semibold">
-            {t.counterLabel}
+
+          {/* Main Title */}
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight mb-4 bg-gradient-to-r from-amber-200 via-amber-300 to-yellow-500 bg-clip-text text-transparent drop-shadow-sm">
+            {t.title}
+          </h1>
+
+          {/* Decorative Gold Divider */}
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <span className="h-px w-12 bg-gradient-to-r from-transparent to-amber-400/70" />
+            <span className="text-amber-300 text-sm">✦</span>
+            <span className="h-px w-12 bg-gradient-to-l from-transparent to-amber-400/70" />
+          </div>
+
+          {/* Subtitle */}
+          <p className="text-indigo-100 text-lg sm:text-xl leading-relaxed mb-8 font-normal">
+            {t.subtitle}
+          </p>
+
+          {/* Live 15-Million Counter & Progress Bar */}
+          <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-6 shadow-inner">
+            <div className="text-4xl sm:text-5xl font-black tracking-tight text-amber-300">
+              {count.toLocaleString()}
+              <span className="text-xl sm:text-2xl font-bold text-indigo-200"> / 15,000,000</span>
+            </div>
+            <div className="text-xs sm:text-sm uppercase tracking-widest text-indigo-200 mt-2 font-semibold">
+              {t.counterLabel}
+            </div>
+
+            {/* Progress Bar */}
+            <div className="w-full bg-indigo-950/80 h-3 rounded-full mt-4 overflow-hidden border border-white/10">
+              <div
+                className="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 h-full rounded-full transition-all duration-700"
+                style={{ width: `${Math.min(100, Math.max(1.5, (count / 15000000) * 100))}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Quick Jump Button to Registration Form */}
+          <div className="mt-7">
+            <a
+              href="#pledge-form"
+              className="inline-block px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-indigo-950 font-extrabold text-base sm:text-lg shadow-lg hover:brightness-105 transition transform hover:-translate-y-0.5"
+            >
+              {t.submitBtn} ↓
+            </a>
           </div>
         </div>
       </header>
+
 
       {/* Warm Gold-Accented Dedication Card */}
       <section className="max-w-2xl mx-auto bg-white/90 backdrop-blur border-t-4 border-amber-400 rounded-2xl p-6 mb-8 shadow-md text-center">
