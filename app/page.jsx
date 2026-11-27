@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { getFastOfEsther2027 } from '../utils/getFastTimes';
 import { translations } from '../utils/translations';
-import { ManualCitySelector, SocialShareBar } from '../utils/CampaignWidgets';
+import { ManualCitySelector, SocialShareBar, HiddenBlueprintCard } from '../utils/CampaignWidgets';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -257,6 +257,11 @@ export default function FastOfEstherApp() {
      )}
      <ManualCitySelector onSelectTimes={setTimes} />
    </section>
+      </header>
+
+      <HiddenBlueprintCard />
+
+      <SocialShareBar />
 
    {/* Social Share Bar */}
    <SocialShareBar />
