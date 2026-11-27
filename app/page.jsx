@@ -243,7 +243,7 @@ export default function FastOfEstherApp() {
           <p className="text-center text-gray-500">{t.noVideos}</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {recentVideos.map((item) => (
+                       {recentVideos.map((item) => (
               <div key={item.id} className="bg-white border rounded-xl overflow-hidden shadow-sm">
                 <video
                   src={item.publicUrl}
@@ -252,15 +252,14 @@ export default function FastOfEstherApp() {
                   preload="metadata"
                   className="w-full h-48 object-cover bg-black"
                 />
-{item.full_name}
-{item.country}
-{item.fast_duration}
+                <div className="p-4">
                   <div className="font-bold text-lg">{item.full_name}</div>
                   <div className="text-sm text-gray-600">{item.country}</div>
                   <div className="text-xs text-blue-700 mt-1 font-medium">{item.fast_duration}</div>
                 </div>
               </div>
             ))}
+
           </div>
         )}
       </section>
