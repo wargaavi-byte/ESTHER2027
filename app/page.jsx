@@ -1,5 +1,3 @@
-```jsx
-// app/page.jsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -14,7 +12,7 @@ const supabase = createClient(
 
 export default function FastOfEstherApp() {
   const [lang, setLang] = useState('en');
-  const t = translations[lang];
+  const t = translations[lang] || translations.en;
 
   const [count, setCount] = useState(0);
   const [recentVideos, setRecentVideos] = useState([]);
@@ -22,7 +20,7 @@ export default function FastOfEstherApp() {
   const [formData, setFormData] = useState({
     fullName: '',
     country: '',
-    fastDuration: translations.en.durationOptions,
+    fastDuration: translations.en.durationOptions[0],
   });
   const [videoFile, setVideoFile] = useState(null);
   const [status, setStatus] = useState({ loading: false, message: '', error: false });
@@ -69,12 +67,12 @@ export default function FastOfEstherApp() {
     setLang(newLang);
     setFormData((prev) => ({
       ...prev,
-      fastDuration: translations[newLang].durationOptions,
+      fastDuration: translations[newLang].durationOptions[0],
     }));
   };
 
   const handleVideoChange = (e) => {
-    const file = e.target.files ? e.target.files : null;
+    const file = e.target.files ? e.target.files[0] : null;
     if (!file) return;
 
     const videoEl = document.createElement('video');
@@ -126,7 +124,7 @@ export default function FastOfEstherApp() {
       setStatus({ loading: false, message: dbError.message, error: true });
     } else {
       setStatus({ loading: false, message: t.successMsg, error: false });
-      setFormData({ fullName: '', country: '', fastDuration: t.durationOptions });
+      setFormData({ fullName: '', country: '', fastDuration: t.durationOptions[0] });
       setVideoFile(null);
       fetchDashboardData();
     }
@@ -246,6 +244,14 @@ export default function FastOfEstherApp() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {recentVideos.map((item) => (
+              <div key={item.id} className="bg-white border rounded-xl overflow-hidden shadow-sm">
+                <video
+                  src={item.publicUrl}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-48 object-cover bg-black"
+                />
 {item.full_name}
 {item.country}
 {item.fast_duration}
