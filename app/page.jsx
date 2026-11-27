@@ -257,7 +257,6 @@ export default function FastOfEstherApp() {
      )}
      <ManualCitySelector onSelectTimes={setTimes} />
    </section>
-      </header>
 
       <HiddenBlueprintCard />
 
