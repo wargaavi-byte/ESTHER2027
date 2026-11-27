@@ -182,3 +182,91 @@ export function HiddenBlueprintCard() {
     </section>
   );
 }
+export function ProudToBeJewishCard() {
+  return (
+    <section className="max-w-2xl mx-auto bg-white/95 backdrop-blur border-t-4 border-amber-500 rounded-2xl p-6 sm:p-8 mb-8 shadow-md text-left">
+      <h2
+        style={{ fontFamily: 'var(--font-cinzel), serif' }}
+        className="text-2xl sm:text-3xl font-extrabold text-indigo-950 mb-4 text-center"
+      >
+        Why Be Proud to Be Jewish? A Perspective from the Torah
+      </h2>
+
+      <div className="space-y-4 text-gray-700 leading-relaxed text-base">
+        <p>
+          You don’t have to be strictly observant to feel a deep sense of pride in being Jewish. When you strip away the labels and look at the Torah not just as a religious rulebook, but as the foundational story and blueprint of our people, it offers a powerful answer to why our heritage matters today.
+        </p>
+        <p className="font-medium text-indigo-950">
+          Here is what the Torah says about who we are—and why it’s worth being proud of.
+        </p>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            1. We Were Built to Question Everything
+          </h3>
+          <p className="mb-2">
+            From the very beginning, Judaism wasn&apos;t built on blind obedience. Our story starts with Abraham challenging the status quo of his entire world—and even arguing with God over justice in Sodom. Even the name Israel (<em>Yisrael</em>) literally translates to &ldquo;one who struggles with God.&rdquo;
+          </p>
+          <p className="pl-3 border-l-2 border-indigo-300 text-gray-800">
+            <strong>What it means for us:</strong> The Torah champions critical thinking, debate, and wrestling with tough questions. Being Jewish means belonging to a culture that values your intellect, encourages you to ask &ldquo;why,&rdquo; and refuses to accept injustice just because &ldquo;that&apos;s the way it&apos;s always been.&rdquo;
+          </p>
+        </div>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            2. You Are Part of an Unbroken 3,000-Year Story
+          </h3>
+          <p className="mb-2">
+            The Torah isn&apos;t just ancient history; it’s a family album. Every generation of Jews has carried this story forward through empires, exiles, and unimaginable challenges, refusing to disappear.
+          </p>
+          <p className="pl-3 border-l-2 border-indigo-300 text-gray-800">
+            <strong>What it means for us:</strong> Resilience is in our DNA. Whether you light Shabbat candles every week or only eat bagels on Sunday, you are a living link in one of the longest-running, most resilient human stories on earth.
+          </p>
+        </div>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            3. Purpose Over Perfection
+          </h3>
+          <p className="mb-2">
+            In the Torah, none of our foundational heroes are flawless. Moses had a speech impediment and lost his temper; Jacob made mistakes; King David had major personal failings. The Torah intentionally leaves their flaws in the text to prove a point: you don’t have to be a saint to matter.
+          </p>
+          <p className="pl-3 border-l-2 border-indigo-300 text-gray-800">
+            <strong>What it means for us:</strong> Judaism isn’t an &ldquo;all-or-nothing&rdquo; club. The Torah teaches that our value comes from trying to grow, taking responsibility when we mess up, and showing up for others—not from being perfect.
+          </p>
+        </div>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            4. Turning Ordinary Life Into Something Meaningful
+          </h3>
+          <p className="mb-2">
+            The core message of the Torah is about elevating the physical, everyday world rather than escaping from it. It takes basic human routines—eating, working, resting, building relationships—and asks how we can bring intention, gratitude, and ethics into them.
+          </p>
+          <p className="pl-3 border-l-2 border-indigo-300 text-gray-800">
+            <strong>What it means for us:</strong> You don’t need a synagogue to live out Torah values. Practicing fairness in business, showing up for a friend in need, taking a true day to unplug from work, and repairing the world (<em>Tikkun Olam</em>) are all deeply rooted in the Torah’s blueprint for a good life.
+          </p>
+        </div>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-bold text-indigo-900 mb-1">
+            5. A Radical Vision of Human Dignity
+          </h3>
+          <p className="mb-2">
+            Thousands of years ago, when ancient societies were built on rigid class systems and absolute rulers, the Torah introduced revolutionary ideas: that every single human being is created in the divine image (<em>B&apos;tzelem Elohim</em>), that no ruler is above the law, and that a society is judged by how it treats the vulnerable—the stranger, the widow, and the orphan.
+          </p>
+          <p className="pl-3 border-l-2 border-indigo-300 text-gray-800">
+            <strong>What it means for us:</strong> Modern concepts of human rights, social justice, and universal education have deep roots in our text. Being proud to be Jewish means taking pride in a heritage that helped introduce moral responsibility to the world.
+          </p>
+        </div>
+
+        <div className="mt-4 p-4 rounded-xl bg-amber-50/80 border border-amber-300 text-indigo-950">
+          <div className="font-bold text-amber-950 mb-1">The Bottom Line:</div>
+          <p>
+            The Torah doesn&apos;t ask you to check your brain at the door or fit into a rigid box. It reminds you that you come from a people of thinkers, survivors, and builders who have spent thousands of years trying to make the world a little bit better. That is a legacy worth claiming—on your own terms.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
