@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Her Name Was Esther',
-  description: 'Join 15 million voices worldwide in unity and solidarity.',
+  title: 'Her Name Was Esther — March 22, 2027',
+  description: 'On March 22, 2027, 15 million voices unite worldwide in fasting, remembrance, and solidarity.',
 };
 
 export default function RootLayout({ children }) {
@@ -9,10 +9,11 @@ export default function RootLayout({ children }) {
       <head>
         <script src="https://tailwindcss.com"></script>
       </head>
-      <body className="bg-gray-50 text-gray-900 min-h-screen">
+      <body className="bg-gradient-to-br from-indigo-50 via-purple-50 to-amber-50 text-gray-900 min-h-screen">
         {children}
       </body>
     </html>
   );
 }
+
 
